@@ -1,89 +1,82 @@
-const path = require("path");
+const path = require(`path`)
 
-exports.createPages = ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, boundActionCreators }) => {
+  const { createPage } = boundActionCreators
 
-  return graphql(`
-    {
-      allMarkdownRemark(
-        sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 1000
-      ) {
-        edges {
-          node {
-            excerpt(pruneLength: 400)
-            html
-            id
-            frontmatter {
-              templateKey
-              path
-              date
-              title
-              image
-              heading
-              description
-              intro {
-                blurbs {
-                  image
-                  text
-                }
-                heading
-                description
-              }
-              main {
-                heading
-                description
-                image1 {
-                  alt
-                  image
-                }
-                image2 {
-                  alt
-                  image
-                }
-                image3 {
-                  alt
-                  image
-                }
-              }
-              testimonials {
-                author
-                quote
-              }
-              full_image
-              pricing {
-                heading
-                description
-                plans {
-                  description
-                  items
-                  plan
-                  price
-                }
-              }
+  // const loadPosts = new Promise((resolve, reject) => {
+  //   graphql(`
+  //     {
+  //       allContentfulPost {
+  //         edges {
+  //           node {
+  //             slug
+  //           }
+  //         }
+  //       }
+  //     }
+  //   `).then(result => {
+  //     result.data.allContentfulPost.edges.map(({ node }) => {
+  //       createPage({
+  //         path: `${node.slug}/`,
+  //         component: path.resolve(`./src/templates/post.js`),
+  //         context: {
+  //           slug: node.slug,
+  //         },
+  //       })
+  //     })
+  //     resolve()
+  //   })
+  // })
+
+  const loadPages = new Promise((resolve, reject) => {
+    graphql(`
+      {
+        allContentfulPage {
+          edges {
+            node {
+              slug
             }
           }
         }
       }
-    }
-  `).then(result => {
-    if (result.errors) {
-      result.errors.forEach(e => console.error(e.toString()));
-      return Promise.reject(result.errors);
-    }
+    `).then(result => {
+      result.data.allContentfulPage.edges.map(({ node }) => {
+        createPage({
+          path: `${node.slug}/`,
+          component: path.resolve(`./src/templates/page.js`),
+          context: {
+            slug: node.slug,
+          },
+        })
+      })
+      resolve()
+    })
+  })
 
-    return result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-      const pagePath = node.frontmatter.path;
-      createPage({
-        path: pagePath,
-        component: path.resolve(
-          `src/templates/${String(node.frontmatter.templateKey)}.js`
-        ),
-        // additional data can be passed via context
-        context: {
-          path: pagePath
-        }
-      });
-    });
-  });
-};
+  // const loadTags = new Promise((resolve, reject) => {
+  //   graphql(`
+  //     {
+  //       allContentfulTag {
+  //         edges {
+  //           node {
+  //             slug
+  //           }
+  //         }
+  //       }
+  //     }
+  //   `).then(result => {
+  //     result.data.allContentfulTag.edges.map(({ node }) => {
+  //       createPage({
+  //         path: `tag/${node.slug}/`,
+  //         component: path.resolve(`./src/templates/tag.js`),
+  //         context: {
+  //           slug: node.slug,
+  //         },
+  //       })
+  //     })
+  //     resolve()
+  //   })
+  // })
+
+  return Promise.all([loadPages])
+}

@@ -1,82 +1,87 @@
-import React from "react";
-import Link from "gatsby-link";
-import Script from "react-load-script";
-import graphql from "graphql";
+import React from 'react'
+import CardList from '../components/CardList'
+import Card from '../components/Card'
+import Container from '../components/Container'
+import PageTitle from '../components/PageTitle'
+import SEO from '../components/SEO'
 
-export default class BlogPage extends React.Component {
-  handleScriptLoad() {
-    if (typeof window !== `undefined` && window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
-    window.netlifyIdentity.init();
-  }
+const Index = ({ data }) => {
+  const posts = data.allContentfulPost.edges
 
-  render() {
-    const { data } = this.props;
-    const { edges: posts } = data.allMarkdownRemark;
-
-    return (
-      <section className="section">
-        <Script
-          url="https://identity.netlify.com/v1/netlify-identity-widget.js"
-          onLoad={() => this.handleScriptLoad()}
-        />
-        <div className="container">
-          <div className="content">
-            <h1 className="has-text-weight-bold is-size-2">Latest Stories</h1>
-          </div>
-          {posts
-            .filter(post => post.node.frontmatter.templateKey === "blog-post")
-            .map(({ node: post }) => (
-              <div
-                className="content"
-                style={{ border: "1px solid #eaecee", padding: "2em 4em" }}
-                key={post.id}
-              >
-                <p>
-                  <Link className="has-text-primary" to={post.frontmatter.path}>
-                    {post.frontmatter.title}
-                  </Link>
-                  <span> &bull; </span>
-                  <small>{post.frontmatter.date}</small>
-                </p>
-                <p>
-                  {post.excerpt}
-                  <br />
-                  <br />
-                  <Link className="button is-small" to={post.frontmatter.path}>
-                    Keep Reading →
-                  </Link>
-                </p>
-              </div>
-            ))}
-        </div>
-      </section>
-    );
-  }
+  return (
+    <div>
+      <SEO />
+      <Container>
+        <PageTitle small>
+          <a
+            href="https://www.gatsbyjs.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Gatsby
+          </a>,{' '}
+          <a
+            href="https://www.contentful.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Contentful
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://www.netlify.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Netlify
+          </a>{' '}
+          <span>🎉</span>
+        </PageTitle>
+        <CardList>
+          {posts.map(({ node: post }) => (
+            <Card
+              key={post.id}
+              slug={post.slug}
+              image={post.heroImage}
+              title={post.title}
+              date={post.publishDate}
+              excerpt={post.body}
+            />
+          ))}
+        </CardList>
+      </Container>
+    </div>
+  )
 }
 
-export const pageQuery = graphql`
-  query BlogQuery {
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+export const query = graphql`
+  query indexQuery {
+    allContentfulPost(
+      limit: 1000
+      sort: { fields: [publishDate], order: DESC }
+    ) {
       edges {
         node {
-          excerpt(pruneLength: 400)
+          title
           id
-          frontmatter {
+          slug
+          publishDate(formatString: "MMMM DD, YYYY")
+          heroImage {
             title
-            templateKey
-            date(formatString: "MMMM DD, YYYY")
-            path
+            sizes(maxWidth: 1800) {
+              ...GatsbyContentfulSizes_withWebp_noBase64
+            }
+          }
+          body {
+            childMarkdownRemark {
+              html
+              excerpt(pruneLength: 80)
+            }
           }
         }
       }
     }
   }
-`;
+`
+
+export default Index
