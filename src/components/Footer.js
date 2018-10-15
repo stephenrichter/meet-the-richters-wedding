@@ -1,54 +1,59 @@
 import React from 'react'
 import styled from 'styled-components'
+import Up from '../components/Up'
+import topography from '../images/topography.svg'
 
-const Wrapper = styled.footer`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 0 auto;
-  max-width: ${props => props.theme.sizes.maxWidth};
+const Wrapper = styled.div`
+  border-top: 1px solid ${props => props.theme.colors.tertiary};
+  position: relative;
+  &::before {
+    content: '';
+    background: url(${topography});
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.15;
+    z-index: -1;
+  }
 `
 
 const List = styled.ul`
+  width: 100%;
+  max-width: ${props => props.theme.sizes.maxWidth};
+  margin: 0 auto;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  align-items: flex-start;
-  width: 100%;
-  border-top: 1px solid ${props => props.theme.colors.secondary};
-  padding: 1em 0 2em;
-  margin: 0 1.5em;
+  align-items: center;
+  padding: 0 2rem;
+  height: 6rem;
 `
 
 const Item = styled.li`
-  display: inline-block;
-  padding: 0.25em 0;
-  width: 100%;
-  @media screen and (min-width: ${props => props.theme.responsive.small}) {
-    width: auto;
-  }
+  color: white;
+  font-weight: 600;
+  font-size: 1.1em;
   a {
-    font-weight: 600;
-    transition: all 0.2s;
-    color: ${props => props.theme.colors.base};
+    margin: 0 1rem 0 0;
     &:hover {
-      color: ${props => props.theme.colors.highlight};
+      opacity: 0.75;
     }
-    &:visited {
-      color: ${props => props.theme.colors.base};
+    @media (hover: none) {
+      opacity: 1 !important;
     }
   }
 `
 
-const Footer = () => (
+const Footer = props => (
   <Wrapper>
     <List>
       <Item>
         <a
           href="https://www.contentful.com/"
-          rel="nofollow noopener noreferrer"
           target="_blank"
+          rel="nofollow noopener noreferrer"
         >
           <img
             src="https://images.ctfassets.net/fo9twyrwpveg/44baP9Gtm8qE2Umm8CQwQk/c43325463d1cb5db2ef97fca0788ea55/PoweredByContentful_LightBackground.svg"
@@ -58,21 +63,7 @@ const Footer = () => (
         </a>
       </Item>
       <Item>
-        <a
-          href="https://github.com/ryanwiemer/gatsby-starter-gcn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          gatsby-starter-gcn
-        </a>{' '}
-        by{' '}
-        <a
-          href="https://github.com/ryanwiemer"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          @ryanwiemer
-        </a>
+        <Up />
       </Item>
     </List>
   </Wrapper>

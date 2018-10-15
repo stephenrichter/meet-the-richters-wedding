@@ -19,7 +19,6 @@ const Background = styled.div`
     text-align: center;
     color: white;
     font-size: 2em;
-    text-transform: uppercase;
     @media screen and (min-width: ${props => props.theme.responsive.small}) {
       font-size: 2.5em;
     }
@@ -66,11 +65,26 @@ const Film = styled.ul`
   }
 `
 
+const Title = styled.h2`
+  text-align: center;
+  font-family: 'Kaushan Script', cursive;
+  font-size: 2em;
+  padding: 4rem 0 4rem 0;
+  z-index: 99;
+  position: relative;
+  @media screen and (min-width: ${props => props.theme.responsive.small}) {
+    font-size: 2.5em;
+  }
+  @media screen and (min-width: ${props => props.theme.responsive.medium}) {
+    font-size: 4em;
+  }
+`
+
 const FilmStrip = props => {
   return (
     <Reveal>
       <Background>
-        <h2>{props.heading}</h2>
+        <Title>{props.heading}</Title>
         <Film>
           {props.images &&
             props.images.map((image, index) => (

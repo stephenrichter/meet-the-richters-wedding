@@ -9,7 +9,7 @@ import { Element } from 'react-scroll'
 
 const Title = styled.h2`
   text-align: center;
-  text-transform: uppercase;
+  font-family: 'Kaushan Script', cursive;
   font-size: 2em;
   padding: 4rem 0 4rem 0;
   z-index: 99;
@@ -29,16 +29,20 @@ const IndexPage = ({ data }) => {
   return (
     <Container>
       <Nav links={navigation.links} />
-      {sections.map(({ node: section }) => (
-        <Element key={section.id} name={section.slug}>
-          {section.heading && (
-            <Reveal>
-              <Title>{section.heading}</Title>
-            </Reveal>
-          )}
-          <Modules modules={section.modules} />
-        </Element>
-      ))}
+      {
+        sections.map(({ node: section }) => {
+          return (
+            <Element key={section.id} name={section.slug}>
+              {section.heading && (
+                <Reveal>
+                  <Title>{section.heading}</Title>
+                </Reveal>
+              )}
+              <Modules modules={section.modules} />
+            </Element>
+          )
+        })
+      }
       <Footer />
     </Container>
   )
@@ -72,6 +76,12 @@ export const query = graphql`
                   ...GatsbyContentfulSizes_withWebp_noBase64
                 }
               }
+              logo {
+                title
+                sizes(maxWidth: 1000) {
+                  ...GatsbyContentfulSizes_withWebp_noBase64
+                }
+              }
             }
             ... on ContentfulIntro {
               title
@@ -82,21 +92,67 @@ export const query = graphql`
                 }
               }
             }
-            ... on ContentfulBiography {
+            ... on ContentfulGrid {
               title
-              name
-              website
-              instagram
-              facebook
-              image {
+              modules {
                 title
-                sizes(maxWidth: 1000) {
+                name
+                position
+                website
+                instagram
+                facebook
+                image {
+                  title
+                  sizes(maxWidth: 1000) {
+                    ...GatsbyContentfulSizes_withWebp_noBase64
+                  }
+                }
+                text {
+                  childMarkdownRemark {
+                    html
+                  }
+                }
+              }
+            }
+            ... on ContentfulFilmstrip {
+              title
+              heading
+              images {
+                title
+                sizes(maxWidth: 600) {
                   ...GatsbyContentfulSizes_withWebp_noBase64
                 }
               }
+            }
+            ... on ContentfulBody {
+              title
               text {
                 childMarkdownRemark {
                   html
+                }
+              }
+            }
+            ... on ContentfulAgenda {
+              title
+              heading1
+              text1 {
+                childMarkdownRemark {
+                  html
+                }
+              }
+              heading2
+              text2 {
+                childMarkdownRemark {
+                  html
+                }
+              }
+            }
+            ... on ContentfulDivider {
+              title
+              image {
+                title
+                sizes(maxWidth: 1800) {
+                  ...GatsbyContentfulSizes_withWebp_noBase64
                 }
               }
             }

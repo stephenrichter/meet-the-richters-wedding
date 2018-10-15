@@ -54,6 +54,20 @@ const Tree = styled.svg`
   pointer-events: none;
 `
 
+const NavLink = styled.a`
+  display: inline-block;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  border-radius: 2px;
+  text-decoration: none;
+  background: white;
+  color: ${props => props.theme.colors.base};
+  cursor: pointer;
+  position: relative;
+`
+
 const Nav = props => {
   return (
     <Wrapper>
@@ -96,15 +110,12 @@ const Nav = props => {
             ))}
 
           <li>
-            <LinkForScroll
-              to="register"
-              spy
-              smooth
-              duration={300}
+            <NavLink
+              href="/rsvp"
               activeClass="active"
             >
-              Register
-            </LinkForScroll>
+              RSVP
+            </NavLink>
           </li>
         </List>
       </nav>

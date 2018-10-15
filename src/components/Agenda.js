@@ -72,14 +72,14 @@ const Agenda = props => {
             }}
           />
         </Card>
-        <Card>
+        {/* <Card>
           <Heading>{props.heading3}</Heading>
           <Text
             dangerouslySetInnerHTML={{
               __html: props.text3.childMarkdownRemark.html,
             }}
           />
-        </Card>
+        </Card> */}
       </Wrapper>
     </Reveal>
   )

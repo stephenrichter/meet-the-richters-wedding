@@ -123,7 +123,7 @@ const Experience = styled.input`
   }
 `
 
-const Learning = styled.textarea`
+const Dancing = styled.textarea`
   width: 100%;
   flex: 0 1 100%;
   margin: 0 0 1em 0;
@@ -231,6 +231,7 @@ class Form extends React.Component {
       email: '',
       portfolio: '',
       experience: '',
+      dancing: '',
       questions: '',
       dogs: '',
       success: false,
@@ -258,7 +259,7 @@ class Form extends React.Component {
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'register', ...this.state }),
+      body: encode({ 'form-name': 'rsvp', ...this.state }),
     })
       .then(this.handleSuccess)
       .catch(error => alert(error))
@@ -267,7 +268,7 @@ class Form extends React.Component {
 
   handleSuccess = () => {
     // eslint-disable-next-line
-    grecaptcha.reset()
+    // grecaptcha.reset()
     this.setState({
       name: '',
       email: '',
@@ -289,7 +290,7 @@ class Form extends React.Component {
         <Slide bottom duration={750}>
           <Slide bottom when={!this.state.success} collapse duration={750}>
             <ContactForm
-              name="register"
+              name="rsvp"
               onSubmit={this.handleSubmit}
               data-netlify="true"
               data-netlify-recaptcha="true"
@@ -297,10 +298,10 @@ class Form extends React.Component {
             >
               <Close to="/">Go Back</Close>
               <Preface>
-                We want to ensure you’re the right fit for this workshop, so we
-                have a few questions for you!
+                We can't wait for you to celebrate with us, but we
+                have a few questions for you first!
               </Preface>
-              <input type="hidden" name="form-name" value="register" />
+              <input type="hidden" name="form-name" value="rsvp" />
               <p hidden>
                 <label>
                   Don’t fill this out:{' '}
@@ -326,7 +327,7 @@ class Form extends React.Component {
               <Portfolio
                 name="portfolio"
                 type="text"
-                placeholder="Portfolio or @Instgaram"
+                placeholder="Another question?"
                 value={this.state.portfolio}
                 onChange={this.handleInputChange}
                 required
@@ -334,16 +335,16 @@ class Form extends React.Component {
               <Experience
                 name="experience"
                 type="text"
-                placeholder="How long have you been shooting?"
+                placeholder="Chicken or Beef?"
                 value={this.state.experience}
                 onChange={this.handleInputChange}
                 required
               />
-              <Learning
-                name="learning"
+              <Dancing
+                name="dancing"
                 type="text"
-                placeholder="What do you hope to learn?"
-                value={this.state.learning}
+                placeholder="What's your favourite song to dance to?"
+                value={this.state.dancing}
                 onChange={this.handleInputChange}
                 required
               />

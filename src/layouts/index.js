@@ -21,7 +21,8 @@ const Template = ({ children }) => {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={config.siteTitle} />
         <link rel="stylesheet" 
-          href="https://fonts.googleapis.com/css?family=PT+Serif:400,700|Source+Sans+Pro:400,600" />
+          href="https://fonts.googleapis.com/css?family=PT+Serif:400,700|Source+Sans+Pro:400,600|Kaushan+Script" />
+        
       </Helmet>
 
       <ThemeProvider theme={theme}>

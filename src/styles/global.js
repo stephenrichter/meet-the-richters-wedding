@@ -25,45 +25,16 @@ injectGlobal`
     font: inherit;
     vertical-align: baseline;
   }
-
-  /* Added to Fix Footer to bottom of viewport */
-  html, body {
-    height: 100%;
-  }
-  .siteRoot {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  .siteContent {
-    flex: 1 0 auto;
-  }
-  footer {
-    width: 100%;
-  }
-
-  /* End Fix to Place Footer on Bottom of Viewport */
-
   article, aside, details, figcaption, figure,
   footer, header, hgroup, menu, nav, section {
     display: block;
   }
-
-  @media screen and (min-width: 35em) {
-    html {
-      margin-right: calc(-100vw + 100%);
-      overflow-x: hidden;
-    }
-  }
-
   ol, ul {
     list-style: none;
   }
-
   blockquote, q {
     quotes: none;
   }
-
   blockquote::before, blockquote::after,
   q::before, q::after {
     content: '';
@@ -74,25 +45,56 @@ injectGlobal`
     border-collapse: collapse;
     border-spacing: 0;
   }
-
   * {
     box-sizing: border-box;
   }
 
+  /* Site Specific Globals */
   body {
-    background: white;
     line-height: 1;
     font-size: 100%;
     font-variant-ligatures: none;
     text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
     text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
     font-weight: 400;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: 'Fira Sans',  -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    background: white;
+    color: #434343;
   }
 
   img {
     display: block;
   	width: 100%;
   	height: auto;
+  }
+
+  a {
+    text-decoration: underline;
+    color: #434343;
+  }
+
+  button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+
+  .nprogress-busy {
+    cursor: wait;
+  }
+
+  #nprogress .peg {
+    display: none !important;
+  }
+
+  #nprogress .bar {
+    height: 4px !important;
   }
 `

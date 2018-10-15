@@ -1,6 +1,7 @@
 import React from 'react'
 import Hero from './Hero'
 import Intro from './Intro'
+import Grid from './Grid'
 import Biography from './Biography'
 import FilmStrip from './FilmStrip'
 import Body from './Body'
@@ -27,19 +28,14 @@ const Modules = props => {
             </div>
           )}
 
-          {module.__typename === 'ContentfulBiography' && (
-            <Biography
-              name={module.name}
-              portfolio={module.portfolio}
-              instagram={module.instagram}
-              facebook={module.facebook}
-              image={module.image}
-              text={module.text}
-              switch={module.switch}
+          {module.__typename === 'ContentfulGrid' && (
+            <Grid
+              title={module.title}
+              bios={module.modules}
             />
           )}
 
-          {module.__typename === 'ContentfulFilmStrip' && (
+          {module.__typename === 'ContentfulFilmstrip' && (
             <FilmStrip heading={module.heading} images={module.images} />
           )}
 
