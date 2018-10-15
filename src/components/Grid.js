@@ -13,7 +13,6 @@ const GridContainer = styled.div`
 `
 
 const Grid = props => {
-  console.log(props)
   return (
     <Reveal>
       <GridContainer>
@@ -28,6 +27,7 @@ const Grid = props => {
               image={bio.image}
               text={bio.text}
               switch={bio.switch}
+              key={index}
             />
         ))}
       </GridContainer>

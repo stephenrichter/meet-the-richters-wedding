@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import 'whatwg-fetch' // Fetch Polyfill
-// import Recaptcha from 'react-google-recaptcha'
 import Slide from 'react-reveal/Slide'
+import Fade from 'react-reveal/Fade'
 import Link from 'gatsby-link'
-import topography from '../images/topography.svg'
+import Sound from 'react-sound'
+import background from '../images/birds-eye-full.jpg'
+import khaled from '../sounds/another-one.mp3'
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,13 +19,14 @@ const Wrapper = styled.div`
   z-index: 0;
   &::before {
     content: '';
-    background-image: url(${topography});
+    background-image: url(${background});
+    background-size: cover;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    opacity: 0.15;
+    opacity: 0.5;
     z-index: -3;
   }
   @media screen and (min-width: ${props => props.theme.responsive.small}) {
@@ -105,30 +108,12 @@ const Email = styled.input`
   }
 `
 
-const Portfolio = styled.input`
-  margin: 0 0 1rem 0;
-  width: 100%;
-  flex: 0 1 100%;
-  @media screen and (min-width: ${props => props.theme.responsive.small}) {
-    flex: 0 1 49%;
-  }
-`
-
-const Experience = styled.input`
-  margin: 0 0 1rem 0;
-  width: 100%;
-  flex: 0 1 100%;
-  @media screen and (min-width: ${props => props.theme.responsive.small}) {
-    flex: 0 1 49%;
-  }
-`
-
 const Dancing = styled.textarea`
   width: 100%;
   flex: 0 1 100%;
   margin: 0 0 1em 0;
   line-height: 1.6;
-  min-height: 150px;
+  min-height: 75px;
   resize: none;
 `
 
@@ -140,8 +125,9 @@ const Questions = styled.textarea`
   resize: none;
 `
 
-const Dogs = styled.div`
-  margin: 0 0 1rem 0;
+const Checkboxes = styled.div`
+  text-align: center;
+  margin: 0.5rem 0 1.5rem 0;
   width: 100%;
   input:invalid {
     box-shadow: none;
@@ -150,13 +136,26 @@ const Dogs = styled.div`
   label {
     margin: 0 1rem 0 0;
   }
+
+  p {
+    margin: 0 0 0.5rem 0;
+  }
+
+  strong {
+    font-weight: 900;
+  }
 `
 
-// const StyledRecaptcha = styled(Recaptcha)`
-//   margin: 0 0 1em 0;
-//   width: 100%;
-//   height: 80px;
-// `
+const Responses = styled.div`
+  margin-top: 1rem;
+`
+
+const Note = styled.div`
+  display: block;
+  color: rgb(155,155,155);
+  font-size: 0.85rem;
+  margin: 0 0 0.75rem 0;
+`
 
 const Submit = styled.input`
   background: ${props => props.theme.colors.base} !important;
@@ -168,6 +167,7 @@ const Submit = styled.input`
     background: gray !important;
     cursor: not-allowed;
   }
+  margin-right: 0.5rem;
 `
 
 const Close = styled(Link)`
@@ -212,8 +212,11 @@ const Success = styled(Link)`
   h3 {
     font-size: 1.1em;
     font-weight: 600;
-    margin: 2rem 1rem;
+    margin: 1rem 1rem;
     text-decoration: underline;
+  }
+  p {
+    padding: 1rem;
   }
 `
 
@@ -229,13 +232,13 @@ class Form extends React.Component {
     this.state = {
       name: '',
       email: '',
-      portfolio: '',
-      experience: '',
+      rsvp: '',
       dancing: '',
+      shuttle: '',
       questions: '',
-      dogs: '',
       success: false,
-      disabledSubmit: true,
+      disabledSubmit: false,
+      playStatus: Sound.status.STOPPED,
     }
   }
 
@@ -247,13 +250,6 @@ class Form extends React.Component {
       [name]: value,
     })
   }
-
-  // handleRecaptcha = value => {
-  //   this.setState({
-  //     'g-recaptcha-response': value,
-  //     disabledSubmit: false,
-  //   })
-  // }
 
   handleSubmit = event => {
     fetch('/', {
@@ -268,37 +264,38 @@ class Form extends React.Component {
 
   handleSuccess = () => {
     // eslint-disable-next-line
-    // grecaptcha.reset()
     this.setState({
       name: '',
       email: '',
-      portfolio: '',
-      experience: '',
+      rsvp: '',
+      dancing: '',
+      shuttle: '',
       questions: '',
-      dogs: '',
       success: true,
       disabledSubmit: true,
     })
   }
 
+  handleSoundPlay = () => {
+    this.setState({
+      playStatus: Sound.status.PLAYING,
+    })
+  }
+
   render() {
-    // const RECAPTCHA_KEY =
-    //   process.env.SITE_RECAPTCHA_KEY ||
-    //   '6Ld7KFwUAAAAAGD3p0lGYNeVgq7jpA3PT2xib8LI'
     return (
       <Wrapper>
-        <Slide bottom duration={750}>
+        <Fade>
           <Slide bottom when={!this.state.success} collapse duration={750}>
             <ContactForm
               name="rsvp"
               onSubmit={this.handleSubmit}
               data-netlify="true"
-              data-netlify-recaptcha="true"
-              data-netlify-honeypot="bot"
+              data-netlify-honeypot="bot-field"
             >
               <Close to="/">Go Back</Close>
               <Preface>
-                We can't wait for you to celebrate with us, but we
+                We hope you are able to celebrate with us, but we
                 have a few questions for you first!
               </Preface>
               <input type="hidden" name="form-name" value="rsvp" />
@@ -324,22 +321,79 @@ class Form extends React.Component {
                 onChange={this.handleInputChange}
                 required
               />
-              <Portfolio
-                name="portfolio"
-                type="text"
-                placeholder="Another question?"
-                value={this.state.portfolio}
-                onChange={this.handleInputChange}
-                required
-              />
-              <Experience
-                name="experience"
-                type="text"
-                placeholder="Chicken or Beef?"
-                value={this.state.experience}
-                onChange={this.handleInputChange}
-                required
-              />
+              <Checkboxes>
+                <p><strong>Are you able to make the wedding?</strong></p>
+                <Responses>
+                  <label>
+                    Yes, I'll be there{' '}
+                    <input
+                      name="rsvp"
+                      type="radio"
+                      value="yes"
+                      checked={this.state.rsvp === 'yes'}
+                      onChange={this.handleInputChange}
+                      required
+                    />
+                  </label>
+                  <label>
+                    No, I can't attend{' '}
+                    <input
+                      name="rsvp"
+                      type="radio"
+                      value="no"
+                      checked={this.state.rsvp === 'no'}
+                      onChange={this.handleInputChange}
+                      required
+                    />
+                  </label>
+                </Responses>
+              </Checkboxes>
+              <Checkboxes>
+                <p><strong>Would you like to reserve a seat on the shuttle?</strong></p>
+                <Note><em>(Note: The shuttle will travel between Birds Eye Cove Farm and the 2 recommended accomodations)</em></Note>
+                <Responses>
+                  <label>
+                    To the venue{' '}
+                    <input
+                      name="shuttle"
+                      type="radio"
+                      value="to-venue"
+                      checked={this.state.shuttle === 'to-venue'}
+                      onChange={this.handleInputChange}
+                    />
+                  </label>
+                  <label>
+                    To the hotels{' '}
+                    <input
+                      name="shuttle"
+                      type="radio"
+                      value="from-venue"
+                      checked={this.state.shuttle === 'from-venue'}
+                      onChange={this.handleInputChange}
+                    />
+                  </label>
+                  <label>
+                    Both ways{' '}
+                    <input
+                      name="shuttle"
+                      type="radio"
+                      value="both"
+                      checked={this.state.shuttle === 'both'}
+                      onChange={this.handleInputChange}
+                    />
+                  </label>
+                  <label>
+                    Neither{' '}
+                    <input
+                      name="shuttle"
+                      type="radio"
+                      value="neither"
+                      checked={this.state.shuttle === 'neither'}
+                      onChange={this.handleInputChange}
+                    />
+                  </label>
+                </Responses>
+              </Checkboxes>
               <Dancing
                 name="dancing"
                 type="text"
@@ -351,53 +405,41 @@ class Form extends React.Component {
               <Questions
                 name="questions"
                 type="text"
-                placeholder="Questions, dietary restrictions or comments? (optional)"
+                placeholder="Any additionals questions, comments, dietary restrictions, or plus-one requests? (optional)"
                 value={this.state.questions}
                 onChange={this.handleInputChange}
               />
-              <Dogs>
-                <span>Do you like dogs?</span>
-                <label>
-                  Yes{' '}
-                  <input
-                    name="dogs"
-                    type="radio"
-                    value="yes"
-                    checked={this.state.dogs === 'yes'}
-                    onChange={this.handleInputChange}
-                    required
-                  />
-                </label>
-                <label>
-                  No{' '}
-                  <input
-                    name="dogs"
-                    type="radio"
-                    value="no"
-                    checked={this.state.dogs === 'no'}
-                    onChange={this.handleInputChange}
-                    required
-                  />
-                </label>
-              </Dogs>
-              {/* <StyledRecaptcha
-                sitekey={RECAPTCHA_KEY}
-                onChange={this.handleRecaptcha}
-              /> */}
-              <Submit
-                disabled={this.state.disabledSubmit}
-                name="submit"
-                type="submit"
-                value="Send"
-              />
+              <div>
+                <Submit
+                  disabled={this.state.disabledSubmit}
+                  name="submit"
+                  type="submit"
+                  value="All done!"
+                />
+                <Submit
+                  disabled={this.state.disabledSubmit}
+                  name="submit"
+                  type="submit"
+                  value="Anotha one!"
+                  onClick={this.handleSoundPlay}
+                />
+              </div>
             </ContactForm>
           </Slide>
-        </Slide>
+        </Fade>
 
         <Success show={this.state.success ? true : undefined} to="/">
-          <h2>Message Received</h2>
-          <h3>Return Home</h3>
+          <h2>Thank You</h2>
+          <p>We have received your RSVP!</p>
+          <p>We will send you a reminder email, and perhaps other annoying updates closer to the wedding.</p>
+          <h3>Return to Main Page</h3>
         </Success>
+
+        <Sound
+          url={khaled}
+          playStatus={this.state.playStatus}
+          volume={80}
+        />
       </Wrapper>
     )
   }

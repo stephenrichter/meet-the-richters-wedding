@@ -36,6 +36,7 @@ const Text = styled.div`
   margin: 0 0 2rem 0;
   p {
     font-size: 1.1em;
+    margin: 0 0 2rem 0;
     @media screen and (min-width: ${props => props.theme.responsive.medium}) {
       font-size: 1.25em;
     }
