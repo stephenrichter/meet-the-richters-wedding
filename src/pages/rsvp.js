@@ -1,8 +1,8 @@
-import React from 'react'
-import Form from '../components/Form'
+import React from "react";
+import Form from "../components/Form";
 
 const RsvpPage = () => {
-  return <Form />
-}
+  return <Form />;
+};
 
-export default RsvpPage
+export default RsvpPage;

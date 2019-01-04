@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import Img from 'gatsby-image'
-import Helmet from 'react-helmet'
+import React from "react";
+import styled from "styled-components";
+import Img from "gatsby-image";
+import Helmet from "react-helmet";
 
 const Wrapper = styled.div`
   position: relative;
   overflow: hidden;
-`
+`;
 
 const BgImg = styled(Img)`
   @supports (object-fit: cover) {
@@ -19,11 +19,11 @@ const BgImg = styled(Img)`
       height: 100vh;
     }
     & > img {
-      object-fit: ${props => props.fit || 'cover'} !important;
-      object-position: ${props => props.position || '50% 50%'} !important;
+      object-fit: ${props => props.fit || "cover"} !important;
+      object-position: ${props => props.position || "50% 50%"} !important;
     }
     &::before {
-      content: '';
+      content: "";
       background: rgba(0, 0, 0, 0.25);
       position: absolute;
       top: 0;
@@ -35,25 +35,45 @@ const BgImg = styled(Img)`
       z-index: 1;
     }
   }
-`
+`;
 
 const Logo = styled.div`
   z-index: 2;
-  width: 60%;
+  width: 85%;
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 350px;
+  color: white;
+`;
+
+const Title = styled.h1`
+  text-align: center;
+  font-family: "Noto Serif SC", serif;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  z-index: 99;
+  position: relative;
+  margin-bottom: 0.5rem;
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
-    width: 50%;
-    max-width: 450px;
+    font-size: 4.5em;
+    margin-bottom: 1rem;
   }
-  @media screen and (min-width: ${props => props.theme.responsive.large}) {
-    width: 50%;
-    max-width: 500px;
+`;
+
+const Subtitle = styled.h3`
+  text-align: center;
+  font-family: "Noto Serif SC", serif;
+  font-size: 1.5em;
+  z-index: 99;
+  position: relative;
+  @media screen and (min-width: ${props => props.theme.responsive.small}) {
+    font-size: 1em;
   }
-`
+  @media screen and (min-width: ${props => props.theme.responsive.medium}) {
+    font-size: 2em;
+  }
+`;
 
 const Hero = props => {
   return (
@@ -66,19 +86,14 @@ const Hero = props => {
         position={props.position}
         alt={props.image.title}
         title={props.image.title}
-        backgroundColor={'#aaaea2'}
+        backgroundColor={"#aaaea2"}
       />
-      {props.logo && (
-        <Logo>
-          <Img
-            sizes={props.logo.sizes}
-            alt={props.logo.title}
-            title={props.logo.title}
-          />
-        </Logo>
-      )}
+      <Logo>
+        <Title>Caleigh &amp; Stephen</Title>
+        <Subtitle>August 31, 2019</Subtitle>
+      </Logo>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

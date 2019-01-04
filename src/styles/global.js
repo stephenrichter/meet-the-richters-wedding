@@ -1,4 +1,4 @@
-import { injectGlobal } from 'styled-components'
+import { injectGlobal } from "styled-components";
 
 injectGlobal`
   /* http://meyerweb.com/eric/tools/css/reset/
@@ -97,4 +97,4 @@ injectGlobal`
   #nprogress .bar {
     height: 4px !important;
   }
-`
+`;

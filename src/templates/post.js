@@ -1,14 +1,14 @@
-import React from 'react'
-import find from 'lodash/find'
-import Helmet from 'react-helmet'
-import config from '../utils/siteConfig'
-import Hero from '../components/Hero'
-import Container from '../components/Container'
-import PageBody from '../components/PageBody'
-import TagList from '../components/TagList'
-import PostLinks from '../components/PostLinks'
-import PostDate from '../components/PostDate'
-import SEO from '../components/SEO'
+import React from "react";
+import find from "lodash/find";
+import Helmet from "react-helmet";
+import config from "../utils/siteConfig";
+import Hero from "../components/Hero";
+import Container from "../components/Container";
+import PageBody from "../components/PageBody";
+import TagList from "../components/TagList";
+import PostLinks from "../components/PostLinks";
+import PostDate from "../components/PostDate";
+import SEO from "../components/SEO";
 
 const PostTemplate = ({ data }) => {
   const {
@@ -18,14 +18,14 @@ const PostTemplate = ({ data }) => {
     heroImage,
     body,
     publishDate,
-    tags,
-  } = data.contentfulPost
-  const postNode = data.contentfulPost
+    tags
+  } = data.contentfulPost;
+  const postNode = data.contentfulPost;
 
   const postIndex = find(
     data.allContentfulPost.edges,
     ({ node: post }) => post.id === id
-  )
+  );
 
   return (
     <div>
@@ -34,7 +34,7 @@ const PostTemplate = ({ data }) => {
       </Helmet>
       <SEO pagePath={slug} postNode={postNode} postSEO />
 
-      <Hero title={title} image={heroImage} height={'50vh'} />
+      <Hero title={title} image={heroImage} height={"50vh"} />
 
       <Container>
         {tags && <TagList tags={tags} />}
@@ -43,8 +43,8 @@ const PostTemplate = ({ data }) => {
         <PostLinks previous={postIndex.previous} next={postIndex.next} />
       </Container>
     </div>
-  )
-}
+  );
+};
 
 export const query = graphql`
   query postQuery($slug: String!) {
@@ -99,6 +99,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export default PostTemplate
+export default PostTemplate;

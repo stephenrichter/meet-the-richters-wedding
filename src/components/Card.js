@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import Link from 'gatsby-link'
-import Img from 'gatsby-image'
+import React from "react";
+import styled from "styled-components";
+import Link from "gatsby-link";
+import Img from "gatsby-image";
 
 const Post = styled.li`
   border: 1px solid ${props => props.theme.colors.secondary};
@@ -31,40 +31,40 @@ const Post = styled.li`
       padding-bottom: 60%;
     }
   }
-`
+`;
 
 const Title = styled.h2`
   font-size: 1.5em;
   font-weight: 600;
   text-transform: capitalize;
   margin: 1rem 1rem 0.5rem 1rem;
-`
+`;
 
 const Date = styled.h3`
   margin: 0 1rem 1.5rem 1rem;
   color: gray;
-`
+`;
 
 const Excerpt = styled.p`
   margin: 0 1rem 1rem 1rem;
   line-height: 1.6;
-`
+`;
 
 const Card = props => {
   return (
     <Post>
       <Link to={`/${props.slug}/`}>
-        <Img sizes={props.image.sizes} backgroundColor={'#eeeeee'} />
+        <Img sizes={props.image.sizes} backgroundColor={"#eeeeee"} />
         <Title>{props.title}</Title>
         <Date>{props.date}</Date>
         <Excerpt
           dangerouslySetInnerHTML={{
-            __html: props.excerpt.childMarkdownRemark.excerpt,
+            __html: props.excerpt.childMarkdownRemark.excerpt
           }}
         />
       </Link>
     </Post>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

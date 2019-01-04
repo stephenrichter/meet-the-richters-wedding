@@ -1,13 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
-import Up from '../components/Up'
-import topography from '../images/topography.svg'
+import React from "react";
+import styled from "styled-components";
+import Up from "../components/Up";
+import topography from "../images/topography.svg";
 
 const Wrapper = styled.div`
   border-top: 1px solid ${props => props.theme.colors.tertiary};
   position: relative;
   &::before {
-    content: '';
+    content: "";
     background: url(${topography});
     position: absolute;
     top: 0;
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
     opacity: 0.15;
     z-index: -1;
   }
-`
+`;
 
 const List = styled.ul`
   width: 100%;
@@ -29,7 +29,7 @@ const List = styled.ul`
   align-items: center;
   padding: 0 2rem;
   height: 6rem;
-`
+`;
 
 const Item = styled.li`
   color: white;
@@ -44,7 +44,7 @@ const Item = styled.li`
       opacity: 1 !important;
     }
   }
-`
+`;
 
 const Footer = props => (
   <Wrapper>
@@ -57,7 +57,7 @@ const Footer = props => (
         >
           <img
             src="https://images.ctfassets.net/fo9twyrwpveg/44baP9Gtm8qE2Umm8CQwQk/c43325463d1cb5db2ef97fca0788ea55/PoweredByContentful_LightBackground.svg"
-            style={{ width: '100px' }}
+            style={{ width: "100px" }}
             alt="Powered by Contentful"
           />
         </a>
@@ -67,6 +67,6 @@ const Footer = props => (
       </Item>
     </List>
   </Wrapper>
-)
+);
 
-export default Footer
+export default Footer;

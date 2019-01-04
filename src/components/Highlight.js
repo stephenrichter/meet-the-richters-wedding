@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import Link from 'gatsby-link'
-import Reveal from 'react-reveal/Reveal'
+import React from "react";
+import styled from "styled-components";
+import Link from "gatsby-link";
+import Reveal from "react-reveal/Reveal";
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     margin: 2rem auto 4rem;
   }
-`
+`;
 
 const Box = styled.div`
   width: 100%;
@@ -47,17 +47,17 @@ const Box = styled.div`
       }
     }
   }
-`
+`;
 
 const Heading = styled.h3`
-  font-family: 'PT Serif', serif;
+  font-family: "Noto Serif SC", serif;
   font-size: 1.25em;
   font-weight: 600;
   margin: 1rem 0;
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     font-size: 1.75em;
   }
-`
+`;
 
 const Cover = styled.div`
   margin: 0 0 1rem 0;
@@ -75,7 +75,7 @@ const Cover = styled.div`
       width: 75px;
     }
   }
-`
+`;
 
 const Subheading = styled.h4`
   font-size: 1.1em;
@@ -85,7 +85,7 @@ const Subheading = styled.h4`
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     font-size: 1.25em;
   }
-`
+`;
 
 const CTA = styled.div`
   margin: 0 0 4rem 0;
@@ -120,7 +120,7 @@ const CTA = styled.div`
       opacity: 1 !important;
     }
   }
-`
+`;
 
 const Highlight = props => {
   return (
@@ -195,7 +195,7 @@ const Highlight = props => {
         <Link to="/register/">Register Now</Link>
       </CTA>
     </Reveal>
-  )
-}
+  );
+};
 
-export default Highlight
+export default Highlight;

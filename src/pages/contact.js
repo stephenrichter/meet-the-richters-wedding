@@ -1,15 +1,15 @@
-import React from 'react'
-import Helmet from 'react-helmet'
-import config from '../utils/siteConfig'
-import Container from '../components/Container'
-import PageTitle from '../components/PageTitle'
-import ContactForm from '../components/ContactForm'
-import SEO from '../components/SEO'
+import React from "react";
+import Helmet from "react-helmet";
+import config from "../utils/siteConfig";
+import Container from "../components/Container";
+import PageTitle from "../components/PageTitle";
+import ContactForm from "../components/ContactForm";
+import SEO from "../components/SEO";
 
 const Contact = ({ data }) => {
   const postNode = {
-    title: `Contact - ${config.siteTitle}`,
-  }
+    title: `Contact - ${config.siteTitle}`
+  };
 
   return (
     <div>
@@ -23,7 +23,7 @@ const Contact = ({ data }) => {
         <ContactForm />
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

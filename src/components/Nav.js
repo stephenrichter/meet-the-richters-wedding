@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-scroll'
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-scroll";
 
 const Wrapper = styled.header`
   display: none;
@@ -16,7 +16,7 @@ const Wrapper = styled.header`
     transform: rotate(-90deg) translateX(-100%);
     border-bottom: 1px solid ${props => props.theme.colors.tertiary};
   }
-`
+`;
 
 const List = styled.ul`
   height: 4em;
@@ -30,7 +30,7 @@ const List = styled.ul`
   li:first-child a {
     padding: 0.25rem 0.5rem;
   }
-`
+`;
 
 const LinkForScroll = styled(Link)`
   display: inline-block;
@@ -44,7 +44,7 @@ const LinkForScroll = styled(Link)`
   color: ${props => props.theme.colors.base};
   cursor: pointer;
   position: relative;
-`
+`;
 
 const Tree = styled.svg`
   transform-origin: left top;
@@ -52,7 +52,7 @@ const Tree = styled.svg`
   fill: ${props => props.theme.colors.base};
   position: relative;
   pointer-events: none;
-`
+`;
 
 const NavLink = styled.a`
   display: inline-block;
@@ -66,7 +66,7 @@ const NavLink = styled.a`
   color: ${props => props.theme.colors.base};
   cursor: pointer;
   position: relative;
-`
+`;
 
 const Nav = props => {
   return (
@@ -110,17 +110,14 @@ const Nav = props => {
             ))}
 
           <li>
-            <NavLink
-              href="/rsvp"
-              activeClass="active"
-            >
+            <NavLink href="/rsvp" activeClass="active">
               RSVP
             </NavLink>
           </li>
         </List>
       </nav>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

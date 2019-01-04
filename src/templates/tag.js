@@ -1,16 +1,16 @@
-import React from 'react'
-import sortBy from 'lodash/sortBy'
-import Helmet from 'react-helmet'
-import config from '../utils/siteConfig'
-import Card from '../components/Card'
-import CardList from '../components/CardList'
-import PageTitle from '../components/PageTitle'
-import Container from '../components/Container'
+import React from "react";
+import sortBy from "lodash/sortBy";
+import Helmet from "react-helmet";
+import config from "../utils/siteConfig";
+import Card from "../components/Card";
+import CardList from "../components/CardList";
+import PageTitle from "../components/PageTitle";
+import Container from "../components/Container";
 
 const TagTemplate = ({ data }) => {
-  const { title, slug } = data.contentfulTag
+  const { title, slug } = data.contentfulTag;
 
-  const posts = sortBy(data.contentfulTag.post, 'publishDate').reverse()
+  const posts = sortBy(data.contentfulTag.post, "publishDate").reverse();
 
   return (
     <div>
@@ -40,8 +40,8 @@ const TagTemplate = ({ data }) => {
         </CardList>
       </Container>
     </div>
-  )
-}
+  );
+};
 
 export const query = graphql`
   query tagQuery($slug: String!) {
@@ -69,6 +69,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export default TagTemplate
+export default TagTemplate;

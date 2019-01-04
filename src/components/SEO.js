@@ -1,120 +1,120 @@
-import React, { Component } from 'react'
-import Helmet from 'react-helmet'
-import config from '../utils/siteConfig'
+import React, { Component } from "react";
+import Helmet from "react-helmet";
+import config from "../utils/siteConfig";
 
 class SEO extends Component {
   render() {
-    const { postNode, pagePath, postSEO, pageSEO, customTitle } = this.props
-    let title
-    let description
-    let image
-    let imgWidth
-    let imgHeight
-    let pageUrl
+    const { postNode, pagePath, postSEO, pageSEO, customTitle } = this.props;
+    let title;
+    let description;
+    let image;
+    let imgWidth;
+    let imgHeight;
+    let pageUrl;
 
     // Set Default OpenGraph Parameters for Fallback
-    title = config.siteTitle
-    description = config.siteDescription
-    image = config.siteUrl + config.shareImage
-    imgWidth = config.shareImageWidth
-    imgHeight = config.shareImageHeight
-    pageUrl = config.siteUrl
+    title = config.siteTitle;
+    description = config.siteDescription;
+    image = config.siteUrl + config.shareImage;
+    imgWidth = config.shareImageWidth;
+    imgHeight = config.shareImageHeight;
+    pageUrl = config.siteUrl;
 
     if (customTitle) {
-      title = postNode.title
-      pageUrl = config.siteUrl + '/' + pagePath + '/'
+      title = postNode.title;
+      pageUrl = config.siteUrl + "/" + pagePath + "/";
     }
 
     // Replace with Page Parameters if post or page
     if (postSEO || pageSEO) {
-      title = postNode.title
+      title = postNode.title;
       description =
         postNode.metaDescription === null
           ? postNode.body.childMarkdownRemark.excerpt
-          : postNode.metaDescription.internal.content
+          : postNode.metaDescription.internal.content;
 
-      pageUrl = config.siteUrl + '/' + pagePath + '/'
+      pageUrl = config.siteUrl + "/" + pagePath + "/";
     }
     // Use Hero Image for OpenGraph
     if (postSEO) {
-      image = 'https:' + postNode.heroImage.ogimg.src
-      imgWidth = postNode.heroImage.ogimg.width
-      imgHeight = postNode.heroImage.ogimg.height
+      image = "https:" + postNode.heroImage.ogimg.src;
+      imgWidth = postNode.heroImage.ogimg.width;
+      imgHeight = postNode.heroImage.ogimg.height;
     }
 
     // Default Website Schema
     const schemaOrgJSONLD = [
       {
-        '@context': 'http://schema.org',
-        '@type': 'WebSite',
+        "@context": "http://schema.org",
+        "@type": "WebSite",
         url: config.siteUrl,
         name: config.siteTitle,
-        alternateName: config.siteTitleAlt ? config.siteTitleAlt : '',
-      },
-    ]
+        alternateName: config.siteTitleAlt ? config.siteTitleAlt : ""
+      }
+    ];
 
     // Blog Post Schema
     if (postSEO) {
       schemaOrgJSONLD.push(
         {
-          '@context': 'http://schema.org',
-          '@type': 'BreadcrumbList',
+          "@context": "http://schema.org",
+          "@type": "BreadcrumbList",
           itemListElement: [
             {
-              '@type': 'ListItem',
+              "@type": "ListItem",
               position: 1,
               item: {
-                '@id': config.siteUrl,
-                name: config.siteTitle,
-              },
+                "@id": config.siteUrl,
+                name: config.siteTitle
+              }
             },
             {
-              '@type': 'ListItem',
+              "@type": "ListItem",
               position: 2,
               item: {
-                '@id': pageUrl,
-                name: title,
-              },
-            },
-          ],
+                "@id": pageUrl,
+                name: title
+              }
+            }
+          ]
         },
         {
-          '@context': 'http://schema.org',
-          '@type': 'BlogPosting',
+          "@context": "http://schema.org",
+          "@type": "BlogPosting",
           url: pageUrl,
           name: title,
-          alternateName: config.siteTitleAlt ? config.siteTitleAlt : '',
+          alternateName: config.siteTitleAlt ? config.siteTitleAlt : "",
           headline: title,
           image: {
-            '@type': 'ImageObject',
+            "@type": "ImageObject",
             url: image,
             width: imgWidth,
-            height: imgHeight,
+            height: imgHeight
           },
           author: {
-            '@type': 'Person',
+            "@type": "Person",
             name: config.author,
-            url: config.authorUrl,
+            url: config.authorUrl
           },
           publisher: {
-            '@type': 'Organization',
+            "@type": "Organization",
             name: config.publisher,
-            url: config.siteUrl,
+            url: config.siteUrl
           },
           datePublished: postNode.publishDateISO,
-          mainEntityOfPage: pageUrl,
+          mainEntityOfPage: pageUrl
         }
-      )
+      );
     }
 
     // Page SEO Schema
     if (pageSEO) {
       schemaOrgJSONLD.push({
-        '@context': 'http://schema.org',
-        '@type': 'WebPage',
+        "@context": "http://schema.org",
+        "@type": "WebPage",
         url: pageUrl,
-        name: title,
-      })
+        name: title
+      });
     }
 
     return (
@@ -142,14 +142,14 @@ class SEO extends Component {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:creator"
-          content={config.userTwitter ? config.userTwitter : ''}
+          content={config.userTwitter ? config.userTwitter : ""}
         />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:image" content={image} />
         <meta name="twitter:description" content={description} />
       </Helmet>
-    )
+    );
   }
 }
 
-export default SEO
+export default SEO;

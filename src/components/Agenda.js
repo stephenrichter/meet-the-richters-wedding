@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import Reveal from 'react-reveal/Reveal'
+import React from "react";
+import styled from "styled-components";
+import Reveal from "react-reveal/Reveal";
 
 const Wrapper = styled.div`
   margin: 2rem auto 4rem;
@@ -8,9 +8,9 @@ const Wrapper = styled.div`
   max-width: ${props => props.theme.sizes.maxWidth};
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
   }
-`
+`;
 
 const Card = styled.div`
   border: 1px solid ${props => props.theme.colors.tertiary};
@@ -19,7 +19,7 @@ const Card = styled.div`
   width: 100%;
   transition: 0.3s;
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
-    flex: 0 1 32%;
+    flex: 0 1 45%;
   }
   &:hover {
     transform: translateY(-10px);
@@ -27,10 +27,10 @@ const Card = styled.div`
   @media (hover: none) {
     transform: none !important;
   }
-`
+`;
 
 const Heading = styled.h3`
-  font-family: 'PT Serif', serif;
+  font-family: "Noto Serif SC", serif;
   font-size: 1.25em;
   font-weight: 600;
   text-align: center;
@@ -40,7 +40,7 @@ const Heading = styled.h3`
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     font-size: 1.75em;
   }
-`
+`;
 
 const Text = styled.div`
   padding: 1em;
@@ -50,7 +50,7 @@ const Text = styled.div`
     list-style: disc;
     list-style-position: inside;
   }
-`
+`;
 
 const Agenda = props => {
   return (
@@ -60,7 +60,7 @@ const Agenda = props => {
           <Heading>{props.heading1}</Heading>
           <Text
             dangerouslySetInnerHTML={{
-              __html: props.text1.childMarkdownRemark.html,
+              __html: props.text1.childMarkdownRemark.html
             }}
           />
         </Card>
@@ -68,21 +68,13 @@ const Agenda = props => {
           <Heading>{props.heading2}</Heading>
           <Text
             dangerouslySetInnerHTML={{
-              __html: props.text2.childMarkdownRemark.html,
+              __html: props.text2.childMarkdownRemark.html
             }}
           />
         </Card>
-        {/* <Card>
-          <Heading>{props.heading3}</Heading>
-          <Text
-            dangerouslySetInnerHTML={{
-              __html: props.text3.childMarkdownRemark.html,
-            }}
-          />
-        </Card> */}
       </Wrapper>
     </Reveal>
-  )
-}
+  );
+};
 
-export default Agenda
+export default Agenda;

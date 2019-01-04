@@ -1,10 +1,10 @@
-import React from 'react'
-import styled from 'styled-components'
-import Img from 'gatsby-image'
+import React from "react";
+import styled from "styled-components";
+import Img from "gatsby-image";
 
 const Wrapper = styled.div`
   margin: 0;
-`
+`;
 
 const Divider = props => {
   return (
@@ -13,10 +13,10 @@ const Divider = props => {
         sizes={props.image.sizes}
         alt={props.image.title}
         title={props.image.title}
-        backgroundColor={'#aaaea2'}
+        backgroundColor={"#aaaea2"}
       />
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Divider
+export default Divider;

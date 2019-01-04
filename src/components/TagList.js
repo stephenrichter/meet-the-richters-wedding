@@ -1,11 +1,11 @@
-import React from 'react'
-import styled from 'styled-components'
-import Link from 'gatsby-link'
+import React from "react";
+import styled from "styled-components";
+import Link from "gatsby-link";
 
 const List = styled.ul`
   margin: 0 auto 2em auto;
   max-width: ${props => props.theme.sizes.maxWidthCentered};
-`
+`;
 
 const Tag = styled.li`
   display: inline-block;
@@ -23,7 +23,7 @@ const Tag = styled.li`
       background: ${props => props.theme.colors.secondary};
     }
   }
-`
+`;
 
 const TagList = props => {
   return (
@@ -34,7 +34,7 @@ const TagList = props => {
         </Tag>
       ))}
     </List>
-  )
-}
+  );
+};
 
-export default TagList
+export default TagList;

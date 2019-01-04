@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-require('prismjs/themes/prism.css')
+import React from "react";
+import styled from "styled-components";
+require("prismjs/themes/prism.css");
 
 const Body = styled.div`
   margin: 0 auto;
@@ -95,14 +95,14 @@ const Body = styled.div`
       background: inherit !important;
     }
   }
-`
+`;
 
 const PageBody = props => {
   return (
     <Body
       dangerouslySetInnerHTML={{ __html: props.body.childMarkdownRemark.html }}
     />
-  )
-}
+  );
+};
 
-export default PageBody
+export default PageBody;

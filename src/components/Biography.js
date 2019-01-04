@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import Img from 'gatsby-image'
-import Reveal from 'react-reveal/Reveal'
+import React from "react";
+import styled from "styled-components";
+import Img from "gatsby-image";
+import Reveal from "react-reveal/Reveal";
 
 const About = styled.div`
   display: flex row;
@@ -11,27 +11,27 @@ const About = styled.div`
   padding: 0 2rem 2rem 2rem;
   width: 100%;
   text-align: center;
-`
+`;
 
 const Name = styled.h2`
-  font-family: 'PT Serif', serif;
-  font-weight: 600;
+  font-family: "Noto Serif SC", serif;
+  font-weight: 700;
   font-size: 1.25rem;
   margin: 0 0 0.5rem 0;
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     font-size: 1.5rem;
   }
-`
+`;
 
 const Position = styled.h3`
-  font-family: 'PT Serif', serif;
-  color: rgb(150,150,150);
+  font-family: "Noto Serif SC", serif;
+  color: rgb(150, 150, 150);
   font-size: 0.85rem;
   margin: 0 0 1rem 0;
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     font-size: 1rem;
   }
-`
+`;
 
 const Text = styled.div`
   margin: 0 0 2rem 0;
@@ -39,7 +39,7 @@ const Text = styled.div`
   p {
     line-height: 1.5;
   }
-`
+`;
 
 const ExternalLinks = styled.div`
   a {
@@ -69,7 +69,7 @@ const ExternalLinks = styled.div`
     height: 1.5rem;
     width: 1.5rem;
   }
-`
+`;
 
 const Biography = props => {
   return (
@@ -79,14 +79,18 @@ const Biography = props => {
           sizes={props.image.sizes}
           alt={props.image.title}
           title={props.image.title}
-          backgroundColor={'#aaaea2'}
-          style={{ borderRadius: '50%', maxWidth:'50%', margin:'0 auto 1rem' }}
+          backgroundColor={"#aaaea2"}
+          style={{
+            borderRadius: "50%",
+            maxWidth: "50%",
+            margin: "0 auto 1rem"
+          }}
         />
         <Name>{props.name}</Name>
         <Position>{props.position}</Position>
         <Text
           dangerouslySetInnerHTML={{
-            __html: props.text.childMarkdownRemark.html,
+            __html: props.text.childMarkdownRemark.html
           }}
         />
         <ExternalLinks>
@@ -111,7 +115,7 @@ const Biography = props => {
         </ExternalLinks>
       </About>
     </Reveal>
-  )
-}
+  );
+};
 
-export default Biography
+export default Biography;

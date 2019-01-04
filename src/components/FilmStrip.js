@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import Img from 'gatsby-image'
-import Reveal from 'react-reveal/Reveal'
+import React from "react";
+import styled from "styled-components";
+import Img from "gatsby-image";
+import Reveal from "react-reveal/Reveal";
 
 const Background = styled.div`
   position: relative;
@@ -26,7 +26,7 @@ const Background = styled.div`
       font-size: 4em;
     }
   }
-`
+`;
 
 const Film = styled.ul`
   display: flex;
@@ -40,7 +40,7 @@ const Film = styled.ul`
       height: 0;
       padding: 0 0 100% 0;
       &::before {
-        content: '';
+        content: "";
         background: rgba(0, 0, 0, 0.25);
         position: absolute;
         top: 0;
@@ -63,28 +63,12 @@ const Film = styled.ul`
       transform: translateX(-50%);
     }
   }
-`
-
-const Title = styled.h2`
-  text-align: center;
-  font-family: 'Kaushan Script', cursive;
-  font-size: 2em;
-  padding: 4rem 0 4rem 0;
-  z-index: 99;
-  position: relative;
-  @media screen and (min-width: ${props => props.theme.responsive.small}) {
-    font-size: 2.5em;
-  }
-  @media screen and (min-width: ${props => props.theme.responsive.medium}) {
-    font-size: 4em;
-  }
-`
+`;
 
 const FilmStrip = props => {
   return (
     <Reveal>
       <Background>
-        <Title>{props.heading}</Title>
         <Film>
           {props.images &&
             props.images.map((image, index) => (
@@ -93,14 +77,14 @@ const FilmStrip = props => {
                   sizes={image.sizes}
                   alt={image.title}
                   title={image.title}
-                  backgroundColor={'#aaaea2'}
+                  backgroundColor={"#aaaea2"}
                 />
               </li>
             ))}
         </Film>
       </Background>
     </Reveal>
-  )
-}
+  );
+};
 
-export default FilmStrip
+export default FilmStrip;

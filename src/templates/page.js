@@ -1,14 +1,14 @@
-import React from 'react'
-import Helmet from 'react-helmet'
-import config from '../utils/siteConfig'
-import Container from '../components/Container'
-import PageTitle from '../components/PageTitle'
-import PageBody from '../components/PageBody'
-import SEO from '../components/SEO'
+import React from "react";
+import Helmet from "react-helmet";
+import config from "../utils/siteConfig";
+import Container from "../components/Container";
+import PageTitle from "../components/PageTitle";
+import PageBody from "../components/PageBody";
+import SEO from "../components/SEO";
 
 const PageTemplate = ({ data }) => {
-  const { title, slug, body } = data.contentfulPage
-  const postNode = data.contentfulPage
+  const { title, slug, body } = data.contentfulPage;
+  const postNode = data.contentfulPage;
 
   return (
     <div>
@@ -22,8 +22,8 @@ const PageTemplate = ({ data }) => {
         <PageBody body={body} />
       </Container>
     </div>
-  )
-}
+  );
+};
 
 export const query = graphql`
   query pageQuery($slug: String!) {
@@ -43,6 +43,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export default PageTemplate
+export default PageTemplate;

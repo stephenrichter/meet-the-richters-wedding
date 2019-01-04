@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import 'whatwg-fetch' // Fetch Polyfill
-import Slide from 'react-reveal/Slide'
-import Fade from 'react-reveal/Fade'
-import Link from 'gatsby-link'
-import Sound from 'react-sound'
-import background from '../images/birds-eye-full.jpg'
-import khaled from '../sounds/another-one.mp3'
+import React from "react";
+import styled from "styled-components";
+import "whatwg-fetch"; // Fetch Polyfill
+import Slide from "react-reveal/Slide";
+import Fade from "react-reveal/Fade";
+import Link from "gatsby-link";
+import Sound from "react-sound";
+import background from "../images/birds-eye-full.jpg";
+import khaled from "../sounds/another-one.mp3";
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   overflow: hidden;
   z-index: 0;
   &::before {
-    content: '';
+    content: "";
     background-image: url(${background});
     background-size: cover;
     position: absolute;
@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   @media screen and (min-width: ${props => props.theme.responsive.small}) {
     padding: 2rem;
   }
-`
+`;
 
 const ContactForm = styled.form`
   background: white;
@@ -50,9 +50,9 @@ const ContactForm = styled.form`
   @media screen and (min-width: ${props => props.theme.responsive.small}) {
     padding: 2rem;
   }
-  input[type='text'],
-  input[type='email'],
-  input[type='submit'],
+  input[type="text"],
+  input[type="email"],
+  input[type="submit"],
   textarea {
     appearance: none;
     font-family: inherit;
@@ -82,13 +82,13 @@ const ContactForm = styled.form`
       color: gray;
     }
   }
-`
+`;
 
 const Preface = styled.p`
   width: 100%;
   line-height: 1.5;
   margin: 0 0 2rem 0;
-`
+`;
 
 const Name = styled.input`
   margin: 0 0 1rem 0;
@@ -97,7 +97,7 @@ const Name = styled.input`
   @media screen and (min-width: ${props => props.theme.responsive.small}) {
     flex: 0 1 49%;
   }
-`
+`;
 
 const Email = styled.input`
   margin: 0 0 1rem 0;
@@ -106,7 +106,7 @@ const Email = styled.input`
   @media screen and (min-width: ${props => props.theme.responsive.small}) {
     flex: 0 1 49%;
   }
-`
+`;
 
 const Dancing = styled.textarea`
   width: 100%;
@@ -115,7 +115,7 @@ const Dancing = styled.textarea`
   line-height: 1.6;
   min-height: 75px;
   resize: none;
-`
+`;
 
 const Questions = styled.textarea`
   width: 100%;
@@ -123,7 +123,7 @@ const Questions = styled.textarea`
   line-height: 1.6;
   min-height: 150px;
   resize: none;
-`
+`;
 
 const Checkboxes = styled.div`
   text-align: center;
@@ -144,18 +144,18 @@ const Checkboxes = styled.div`
   strong {
     font-weight: 900;
   }
-`
+`;
 
 const Responses = styled.div`
   margin-top: 1rem;
-`
+`;
 
 const Note = styled.div`
   display: block;
-  color: rgb(155,155,155);
+  color: rgb(155, 155, 155);
   font-size: 0.85rem;
   margin: 0 0 0.75rem 0;
-`
+`;
 
 const Submit = styled.input`
   background: ${props => props.theme.colors.base} !important;
@@ -168,7 +168,7 @@ const Submit = styled.input`
     cursor: not-allowed;
   }
   margin-right: 0.5rem;
-`
+`;
 
 const Close = styled(Link)`
   font-weight: 600;
@@ -182,10 +182,10 @@ const Close = styled(Link)`
   @media (hover: none) {
     opacity: 1 !important;
   }
-`
+`;
 
 const Success = styled(Link)`
-  display: ${props => (props.show ? 'block' : 'none')};
+  display: ${props => (props.show ? "block" : "none")};
   position: fixed;
   top: 50%;
   left: 50%;
@@ -218,69 +218,69 @@ const Success = styled(Link)`
   p {
     padding: 1rem;
   }
-`
+`;
 
 const encode = data => {
   return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&')
-}
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
 
 class Form extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      name: '',
-      email: '',
-      rsvp: '',
-      dancing: '',
-      shuttle: '',
-      questions: '',
+      name: "",
+      email: "",
+      rsvp: "",
+      dancing: "",
+      shuttle: "",
+      questions: "",
       success: false,
       disabledSubmit: false,
-      playStatus: Sound.status.STOPPED,
-    }
+      playStatus: Sound.status.STOPPED
+    };
   }
 
   handleInputChange = event => {
-    const target = event.target
-    const value = target.value
-    const name = target.name
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
     this.setState({
-      [name]: value,
-    })
-  }
+      [name]: value
+    });
+  };
 
   handleSubmit = event => {
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'rsvp', ...this.state }),
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "rsvp", ...this.state })
     })
       .then(this.handleSuccess)
-      .catch(error => alert(error))
-    event.preventDefault()
-  }
+      .catch(error => alert(error));
+    event.preventDefault();
+  };
 
   handleSuccess = () => {
     // eslint-disable-next-line
     this.setState({
-      name: '',
-      email: '',
-      rsvp: '',
-      dancing: '',
-      shuttle: '',
-      questions: '',
+      name: "",
+      email: "",
+      rsvp: "",
+      dancing: "",
+      shuttle: "",
+      questions: "",
       success: true,
-      disabledSubmit: true,
-    })
-  }
+      disabledSubmit: true
+    });
+  };
 
   handleSoundPlay = () => {
     this.setState({
-      playStatus: Sound.status.PLAYING,
-    })
-  }
+      playStatus: Sound.status.PLAYING
+    });
+  };
 
   render() {
     return (
@@ -295,13 +295,13 @@ class Form extends React.Component {
             >
               <Close to="/">Go Back</Close>
               <Preface>
-                We hope you are able to celebrate with us, but we
-                have a few questions for you first!
+                We hope you are able to celebrate with us, but we have a few
+                questions for you first!
               </Preface>
               <input type="hidden" name="form-name" value="rsvp" />
               <p hidden>
                 <label>
-                  Don’t fill this out:{' '}
+                  Don’t fill this out:{" "}
                   <input name="bot" onChange={this.handleInputChange} />
                 </label>
               </p>
@@ -322,26 +322,28 @@ class Form extends React.Component {
                 required
               />
               <Checkboxes>
-                <p><strong>Are you able to make the wedding?</strong></p>
+                <p>
+                  <strong>Are you able to make the wedding?</strong>
+                </p>
                 <Responses>
                   <label>
-                    Yes, I'll be there{' '}
+                    Yes, I'll be there{" "}
                     <input
                       name="rsvp"
                       type="radio"
                       value="yes"
-                      checked={this.state.rsvp === 'yes'}
+                      checked={this.state.rsvp === "yes"}
                       onChange={this.handleInputChange}
                       required
                     />
                   </label>
                   <label>
-                    No, I can't attend{' '}
+                    No, I can't attend{" "}
                     <input
                       name="rsvp"
                       type="radio"
                       value="no"
-                      checked={this.state.rsvp === 'no'}
+                      checked={this.state.rsvp === "no"}
                       onChange={this.handleInputChange}
                       required
                     />
@@ -349,46 +351,55 @@ class Form extends React.Component {
                 </Responses>
               </Checkboxes>
               <Checkboxes>
-                <p><strong>Would you like to reserve a seat on the shuttle?</strong></p>
-                <Note><em>(Note: The shuttle will travel between Birds Eye Cove Farm and the 2 recommended accomodations)</em></Note>
+                <p>
+                  <strong>
+                    Would you like to reserve a seat on the shuttle?
+                  </strong>
+                </p>
+                <Note>
+                  <em>
+                    (Note: The shuttle will travel between Birds Eye Cove Farm
+                    and the 2 recommended accomodations)
+                  </em>
+                </Note>
                 <Responses>
                   <label>
-                    To the venue{' '}
+                    To the venue{" "}
                     <input
                       name="shuttle"
                       type="radio"
                       value="to-venue"
-                      checked={this.state.shuttle === 'to-venue'}
+                      checked={this.state.shuttle === "to-venue"}
                       onChange={this.handleInputChange}
                     />
                   </label>
                   <label>
-                    To the hotels{' '}
+                    To the hotels{" "}
                     <input
                       name="shuttle"
                       type="radio"
                       value="from-venue"
-                      checked={this.state.shuttle === 'from-venue'}
+                      checked={this.state.shuttle === "from-venue"}
                       onChange={this.handleInputChange}
                     />
                   </label>
                   <label>
-                    Both ways{' '}
+                    Both ways{" "}
                     <input
                       name="shuttle"
                       type="radio"
                       value="both"
-                      checked={this.state.shuttle === 'both'}
+                      checked={this.state.shuttle === "both"}
                       onChange={this.handleInputChange}
                     />
                   </label>
                   <label>
-                    Neither{' '}
+                    Neither{" "}
                     <input
                       name="shuttle"
                       type="radio"
                       value="neither"
-                      checked={this.state.shuttle === 'neither'}
+                      checked={this.state.shuttle === "neither"}
                       onChange={this.handleInputChange}
                     />
                   </label>
@@ -431,18 +442,17 @@ class Form extends React.Component {
         <Success show={this.state.success ? true : undefined} to="/">
           <h2>Thank You</h2>
           <p>We have received your RSVP!</p>
-          <p>We will send you a reminder email, and perhaps other annoying updates closer to the wedding.</p>
+          <p>
+            We will send you a reminder email, and perhaps other annoying
+            updates closer to the wedding.
+          </p>
           <h3>Return to Main Page</h3>
         </Success>
 
-        <Sound
-          url={khaled}
-          playStatus={this.state.playStatus}
-          volume={80}
-        />
+        <Sound url={khaled} playStatus={this.state.playStatus} volume={80} />
       </Wrapper>
-    )
+    );
   }
 }
 
-export default Form
+export default Form;

@@ -1,15 +1,15 @@
-import React from 'react'
-import styled from 'styled-components'
-import Reveal from 'react-reveal/Reveal'
-import Modules from '../components/Modules'
-import Footer from '../components/Footer'
-import Nav from '../components/Nav'
-import Container from '../components/Container'
-import { Element } from 'react-scroll'
+import React from "react";
+import styled from "styled-components";
+import Reveal from "react-reveal/Reveal";
+import Modules from "../components/Modules";
+import Footer from "../components/Footer";
+import Nav from "../components/Nav";
+import Container from "../components/Container";
+import { Element } from "react-scroll";
 
 const Title = styled.h2`
   text-align: center;
-  font-family: 'Kaushan Script', cursive;
+  font-family: "Kaushan Script", cursive;
   font-size: 2em;
   padding: 4rem 0 4rem 0;
   z-index: 99;
@@ -20,33 +20,31 @@ const Title = styled.h2`
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     font-size: 4em;
   }
-`
+`;
 
 const IndexPage = ({ data }) => {
-  const sections = data.allContentfulSection.edges
-  const navigation = data.contentfulNavigation
+  const sections = data.allContentfulSection.edges;
+  const navigation = data.contentfulNavigation;
 
   return (
     <Container>
       <Nav links={navigation.links} />
-      {
-        sections.map(({ node: section }) => {
-          return (
-            <Element key={section.id} name={section.slug}>
-              {section.heading && (
-                <Reveal>
-                  <Title>{section.heading}</Title>
-                </Reveal>
-              )}
-              <Modules modules={section.modules} />
-            </Element>
-          )
-        })
-      }
+      {sections.map(({ node: section }) => {
+        return (
+          <Element key={section.id} name={section.slug}>
+            {section.heading && (
+              <Reveal>
+                <Title>{section.heading}</Title>
+              </Reveal>
+            )}
+            <Modules modules={section.modules} />
+          </Element>
+        );
+      })}
       <Footer />
     </Container>
-  )
-}
+  );
+};
 
 export const query = graphql`
   query Index {
@@ -114,6 +112,23 @@ export const query = graphql`
                 }
               }
             }
+            ... on ContentfulRegistryGrid {
+              registryTitle
+              image1 {
+                title
+                sizes(maxWidth: 600) {
+                  ...GatsbyContentfulSizes_withWebp_noBase64
+                }
+              }
+              image2 {
+                title
+                sizes(maxWidth: 600) {
+                  ...GatsbyContentfulSizes_withWebp_noBase64
+                }
+              }
+              url1
+              url2
+            }
             ... on ContentfulFilmstrip {
               title
               heading
@@ -161,6 +176,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export default IndexPage
+export default IndexPage;

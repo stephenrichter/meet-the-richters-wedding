@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import Link from 'gatsby-link'
+import React from "react";
+import styled from "styled-components";
+import Link from "gatsby-link";
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,17 +18,17 @@ const Wrapper = styled.div`
       background: ${props => props.theme.colors.highlight};
     }
   }
-`
+`;
 
 const PreviousLink = styled(Link)`
   margin-right: auto;
   order: 1;
-`
+`;
 
 const NextLink = styled(Link)`
   margin-left: auto;
   order: 2;
-`
+`;
 
 const PostLinks = props => {
   return (
@@ -38,7 +38,7 @@ const PostLinks = props => {
       )}
       {props.next && <NextLink to={`/${props.next.slug}/`}>Next Post</NextLink>}
     </Wrapper>
-  )
-}
+  );
+};
 
-export default PostLinks
+export default PostLinks;

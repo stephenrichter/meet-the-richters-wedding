@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import 'whatwg-fetch' // Fetch Polyfill
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import "whatwg-fetch"; // Fetch Polyfill
 
 /*
   ⚠️ This is an example of a contact form powered with Netlify form handling.
@@ -46,7 +46,7 @@ const Form = styled.form`
     }
   }
   &::before {
-    content: '';
+    content: "";
     background: black;
     height: 100%;
     width: 100%;
@@ -55,10 +55,10 @@ const Form = styled.form`
     left: 0;
     z-index: 1;
     transition: 0.2s all;
-    opacity: ${props => (props.overlay ? '.8' : '0')};
-    visibility: ${props => (props.overlay ? 'visible' : 'hidden')};
+    opacity: ${props => (props.overlay ? ".8" : "0")};
+    visibility: ${props => (props.overlay ? "visible" : "hidden")};
   }
-`
+`;
 
 const Name = styled.input`
   margin: 0 0 1em 0;
@@ -66,7 +66,7 @@ const Name = styled.input`
   @media (min-width: ${props => props.theme.responsive.small}) {
     width: 49%;
   }
-`
+`;
 
 const Email = styled.input`
   margin: 0 0 1em 0;
@@ -74,7 +74,7 @@ const Email = styled.input`
   @media (min-width: ${props => props.theme.responsive.small}) {
     width: 49%;
   }
-`
+`;
 
 const Message = styled.textarea`
   width: 100%;
@@ -82,7 +82,7 @@ const Message = styled.textarea`
   line-height: 1.6;
   min-height: 250px;
   resize: vertical;
-`
+`;
 
 const Submit = styled.input`
   background: ${props => props.theme.colors.base} !important;
@@ -92,7 +92,7 @@ const Submit = styled.input`
   &:hover {
     background: ${props => props.theme.colors.highlight} !important;
   }
-`
+`;
 
 const Modal = styled.div`
   background: white;
@@ -109,8 +109,8 @@ const Modal = styled.div`
   flex-flow: column;
   align-items: flex-start;
   transition: 0.2s all;
-  opacity: ${props => (props.visible ? '1' : '0')};
-  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+  opacity: ${props => (props.visible ? "1" : "0")};
+  visibility: ${props => (props.visible ? "visible" : "hidden")};
   @media screen and (min-width: ${props => props.theme.responsive.small}) {
     min-width: inherit;
     max-width: 400px;
@@ -119,7 +119,7 @@ const Modal = styled.div`
     line-height: 1.6;
     margin: 0 0 2em 0;
   }
-`
+`;
 
 const Button = styled.div`
   background: ${props => props.theme.colors.base};
@@ -141,57 +141,57 @@ const Button = styled.div`
   &:hover {
     background: ${props => props.theme.colors.highlight};
   }
-`
+`;
 
 const encode = data => {
   return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&')
-}
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
 
 class ContactForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      name: '',
-      email: '',
-      message: '',
-      showModal: false,
-    }
+      name: "",
+      email: "",
+      message: "",
+      showModal: false
+    };
   }
 
   handleInputChange = event => {
-    const target = event.target
-    const value = target.value
-    const name = target.name
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
     this.setState({
-      [name]: value,
-    })
-  }
+      [name]: value
+    });
+  };
 
   handleSubmit = event => {
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contact', ...this.state }),
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...this.state })
     })
       .then(this.handleSuccess)
-      .catch(error => alert(error))
-    event.preventDefault()
-  }
+      .catch(error => alert(error));
+    event.preventDefault();
+  };
 
   handleSuccess = () => {
     this.setState({
-      name: '',
-      email: '',
-      message: '',
-      showModal: true,
-    })
-  }
+      name: "",
+      email: "",
+      message: "",
+      showModal: true
+    });
+  };
 
   closeModal = () => {
-    this.setState({ showModal: false })
-  }
+    this.setState({ showModal: false });
+  };
 
   render() {
     return (
@@ -206,7 +206,7 @@ class ContactForm extends React.Component {
         <input type="hidden" name="form-name" value="contact" />
         <p hidden>
           <label>
-            Don’t fill this out:{' '}
+            Don’t fill this out:{" "}
             <input name="bot" onChange={this.handleInputChange} />
           </label>
         </p>
@@ -245,12 +245,12 @@ class ContactForm extends React.Component {
           <Button onClick={this.closeModal}>Okay</Button>
         </Modal>
       </Form>
-    )
+    );
   }
 }
 
 ContactForm.propTypes = {
-  data: PropTypes.object,
-}
+  data: PropTypes.object
+};
 
-export default ContactForm
+export default ContactForm;

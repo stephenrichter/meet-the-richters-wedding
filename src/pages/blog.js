@@ -1,12 +1,12 @@
-import React from 'react'
-import CardList from '../components/CardList'
-import Card from '../components/Card'
-import Container from '../components/Container'
-import PageTitle from '../components/PageTitle'
-import SEO from '../components/SEO'
+import React from "react";
+import CardList from "../components/CardList";
+import Card from "../components/Card";
+import Container from "../components/Container";
+import PageTitle from "../components/PageTitle";
+import SEO from "../components/SEO";
 
 const Index = ({ data }) => {
-  const posts = data.allContentfulPost.edges
+  const posts = data.allContentfulPost.edges;
 
   return (
     <div>
@@ -19,22 +19,22 @@ const Index = ({ data }) => {
             rel="noopener noreferrer"
           >
             Gatsby
-          </a>,{' '}
+          </a>,{" "}
           <a
             href="https://www.contentful.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
             Contentful
-          </a>{' '}
-          and{' '}
+          </a>{" "}
+          and{" "}
           <a
             href="https://www.netlify.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
             Netlify
-          </a>{' '}
+          </a>{" "}
           <span>🎉</span>
         </PageTitle>
         <CardList>
@@ -51,8 +51,8 @@ const Index = ({ data }) => {
         </CardList>
       </Container>
     </div>
-  )
-}
+  );
+};
 
 export const query = graphql`
   query indexQuery {
@@ -82,6 +82,6 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export default Index
+export default Index;

@@ -1,10 +1,10 @@
-import React from 'react'
-import Helmet from 'react-helmet'
-import { ThemeProvider } from 'styled-components'
-import config from '../utils/siteConfig'
-import '../styles/global'
-import theme from '../styles/theme'
-import favicon from '../images/favicon.ico'
+import React from "react";
+import Helmet from "react-helmet";
+import { ThemeProvider } from "styled-components";
+import config from "../utils/siteConfig";
+import "../styles/global";
+import theme from "../styles/theme";
+import favicon from "../images/favicon.ico";
 
 const Template = ({ children }) => {
   return (
@@ -20,18 +20,17 @@ const Template = ({ children }) => {
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={config.siteTitle} />
-        <link rel="stylesheet" 
-          href="https://fonts.googleapis.com/css?family=PT+Serif:400,700|Source+Sans+Pro:400,600|Kaushan+Script" />
-        
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:400,700|Source+Sans+Pro:400,600|Kaushan+Script"
+        />
       </Helmet>
 
       <ThemeProvider theme={theme}>
-        <div className="siteContent">
-          {children()}
-        </div>
+        <div className="siteContent">{children()}</div>
       </ThemeProvider>
     </div>
-  )
-}
+  );
+};
 
-export default Template
+export default Template;

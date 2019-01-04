@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import Reveal from 'react-reveal/Reveal'
-import Biography from './Biography'
+import React from "react";
+import styled from "styled-components";
+import Reveal from "react-reveal/Reveal";
+import Biography from "./Biography";
 
 const GridContainer = styled.div`
   display: grid;
@@ -10,7 +10,7 @@ const GridContainer = styled.div`
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     grid-template-columns: 1fr 1fr 1fr;
   }
-`
+`;
 
 const Grid = props => {
   return (
@@ -29,10 +29,10 @@ const Grid = props => {
               switch={bio.switch}
               key={index}
             />
-        ))}
+          ))}
       </GridContainer>
     </Reveal>
-  )
-}
+  );
+};
 
-export default Grid
+export default Grid;

@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import Reveal from 'react-reveal/Reveal'
+import React from "react";
+import styled from "styled-components";
+import Reveal from "react-reveal/Reveal";
 
 const Wrapper = styled.div`
   background: ${props => props.theme.colors.secondary};
@@ -11,15 +11,15 @@ const Wrapper = styled.div`
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     min-height: 100vh;
   }
-`
+`;
 
 const Info = styled.div`
   max-width: 800px;
   padding: 4rem 2rem 2rem;
-`
+`;
 
 const Heading = styled.h3`
-  font-family: 'PT Serif', serif;
+  font-family: "Noto Serif SC", serif;
   font-size: 1.25em;
   font-weight: bold;
   line-height: 1.4;
@@ -28,7 +28,7 @@ const Heading = styled.h3`
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     font-size: 1.75em;
   }
-`
+`;
 
 const Text = styled.div`
   position: relative;
@@ -44,7 +44,7 @@ const Text = styled.div`
       margin: 0;
     }
   }
-`
+`;
 
 const Intro = props => {
   return (
@@ -54,13 +54,13 @@ const Intro = props => {
           <Heading>{props.heading}</Heading>
           <Text
             dangerouslySetInnerHTML={{
-              __html: props.text.childMarkdownRemark.html,
+              __html: props.text.childMarkdownRemark.html
             }}
           />
         </Info>
       </Reveal>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Intro
+export default Intro;
