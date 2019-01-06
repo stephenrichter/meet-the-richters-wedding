@@ -21,11 +21,25 @@ const Registry = styled.div`
   width: 50%;
 `;
 
+const Header = styled.div`
+  margin: 0 auto;
+  max-width: ${props => props.theme.sizes.maxWidthCentered};
+
+  p {
+    line-height: 1.6;
+    margin: 0 0 2em 0;
+  }
+`;
+
 const RegistryGrid = props => {
   console.log(props);
 
   return (
     <Reveal>
+      <Header>
+        <p>Your presence at our wedding is all that we wish for. However, if you want to give a gift, 
+        we would be grateful for a small cash donation towards our honeymoon or any items off the registries below.</p>
+      </Header>
       <GridContainer>
         <Registry>
           <a href={props.url1} target="_blank" rel="noopener">
