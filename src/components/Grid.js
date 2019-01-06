@@ -4,12 +4,15 @@ import Reveal from "react-reveal/Reveal";
 import Biography from "./Biography";
 
 const GridContainer = styled.div`
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr;
 
   @media screen and (min-width: ${props => props.theme.responsive.medium}) {
     grid-template-columns: 1fr 1fr 1fr;
-  }
+  } */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const Grid = props => {

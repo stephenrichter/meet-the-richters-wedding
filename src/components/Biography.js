@@ -3,13 +3,19 @@ import styled from "styled-components";
 import Img from "gatsby-image";
 import Reveal from "react-reveal/Reveal";
 
+const ItemWrap = styled.div`
+  flex: 0 0 calc(33.33% - 20px);
+
+  @media screen and (max-width: ${props => props.theme.responsive.medium}) {
+    flex: 0 0 100%;
+  }
+`;
+
 const About = styled.div`
-  display: flex row;
   justify-content: center;
   max-width: ${props => props.theme.sizes.maxWidth};
   margin: 0 auto;
   padding: 0 2rem 2rem 2rem;
-  width: 100%;
   text-align: center;
 `;
 
@@ -73,6 +79,7 @@ const ExternalLinks = styled.div`
 
 const Biography = props => {
   return (
+    <ItemWrap>
     <Reveal>
       <About switch={props.switch}>
         <Img
@@ -115,6 +122,7 @@ const Biography = props => {
         </ExternalLinks>
       </About>
     </Reveal>
+    </ItemWrap>
   );
 };
 
