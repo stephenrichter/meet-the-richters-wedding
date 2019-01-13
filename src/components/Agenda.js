@@ -52,6 +52,31 @@ const Text = styled.div`
   }
 `;
 
+const ButtonLink = styled.div`
+  margin: 0 auto;
+  text-align: center;
+
+  a {
+    transition: 0.3s;
+    color: ${props => props.theme.colors.base};
+    display: inline-block;
+    border: 1px solid ${props => props.theme.colors.tertiary};
+    border-radius: 2px;
+    font-size: 2.2rem;
+    padding: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+      border-color: ${props => props.theme.colors.secondary};
+      background: ${props => props.theme.colors.secondary};
+    }
+    @media (hover: none) {
+      border-color: ${props => props.theme.colors.tertiary} !important;
+      background: none !important;
+    }
+  }
+`;
+
 const Agenda = props => {
   return (
     <Reveal>
@@ -73,6 +98,9 @@ const Agenda = props => {
           />
         </Card>
       </Wrapper>
+      <ButtonLink>
+        <a href="/rsvp">Click here to RSVP</a>
+      </ButtonLink>
     </Reveal>
   );
 };

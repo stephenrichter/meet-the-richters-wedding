@@ -184,7 +184,7 @@ const Close = styled(Link)`
   }
 `;
 
-const Success = styled(Link)`
+const Success = styled.div`
   display: ${props => (props.show ? "block" : "none")};
   position: fixed;
   top: 50%;
@@ -218,6 +218,14 @@ const Success = styled(Link)`
   p {
     padding: 1rem;
   }
+`;
+
+const GoLink = styled(Link)`
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 2rem 1rem;
+  display: block;
+  text-decoration: underline;
 `;
 
 const encode = data => {
@@ -276,11 +284,26 @@ class Form extends React.Component {
     });
   };
 
-  handleSoundPlay = () => {
+  handleAnotha = () => {
+    // play the sound and reset the form
     this.setState({
+      name: "",
+      email: "",
+      rsvp: "",
+      dancing: "",
+      shuttle: "",
+      questions: "",
+      success: false,
+      disabledSubmit: false,
       playStatus: Sound.status.PLAYING
-    });
+    })
   };
+
+  handleFinishedPlaying = () => {
+    this.setState({
+      playStatus: Sound.status.STOPPED
+    })
+  }
 
   render() {
     return (
@@ -427,29 +450,28 @@ class Form extends React.Component {
                   type="submit"
                   value="All done!"
                 />
-                <Submit
-                  disabled={this.state.disabledSubmit}
-                  name="submit"
-                  type="submit"
-                  value="Anotha one!"
-                  onClick={this.handleSoundPlay}
-                />
               </div>
             </ContactForm>
           </Slide>
         </Fade>
 
-        <Success show={this.state.success ? true : undefined} to="/">
+        <Success show={this.state.success ? true : undefined}>
           <h2>Thank You</h2>
           <p>We have received your RSVP!</p>
           <p>
             We will send you a reminder email, and perhaps other annoying
             updates closer to the wedding.
           </p>
-          <h3>Return to Main Page</h3>
+          <GoLink to="/">Return to Main Page</GoLink>
+          <GoLink onClick={this.handleAnotha} to="/rsvp">Anotha One!</GoLink>
         </Success>
 
-        <Sound url={khaled} playStatus={this.state.playStatus} volume={80} />
+        <Sound
+          url={khaled}
+          playStatus={this.state.playStatus}
+          volume={80} 
+          onFinishedPlaying={this.handleFinishedPlaying}
+        />
       </Wrapper>
     );
   }
