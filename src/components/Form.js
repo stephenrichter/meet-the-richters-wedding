@@ -324,7 +324,7 @@ class Form extends React.Component {
               <Preface>
                 We hope you are able to celebrate with us, but we have a few
                 questions for you first!<br/>
-                <em>*Please submit one RSVP per person. After clicking All Done you will be asked if you'd like to submit another one.</em>
+                <em>*Please submit one RSVP per person. After clicking 'All done!' you will be asked if you'd like to submit another one.</em>
               </Preface>
               <input type="hidden" name="form-name" value="rsvp" />
               <p hidden>
