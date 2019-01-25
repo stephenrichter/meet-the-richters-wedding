@@ -88,6 +88,10 @@ const Preface = styled.p`
   width: 100%;
   line-height: 1.5;
   margin: 0 0 2rem 0;
+
+  em {
+    font-size: 0.85rem;
+  }
 `;
 
 const Name = styled.input`
@@ -319,7 +323,8 @@ class Form extends React.Component {
               <Close to="/">Go Back</Close>
               <Preface>
                 We hope you are able to celebrate with us, but we have a few
-                questions for you first!
+                questions for you first!<br/>
+                <em>*Please submit one RSVP per person. After clicking All Done you will be asked if you'd like to submit another one.</em>
               </Preface>
               <input type="hidden" name="form-name" value="rsvp" />
               <p hidden>
